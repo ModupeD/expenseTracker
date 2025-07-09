@@ -1,0 +1,19 @@
+.expense-form {
+  max-width: 500px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+button {
+  width: fit-content;
+}

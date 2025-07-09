@@ -1,0 +1,143 @@
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.toolbar-select {
+  min-width: 180px;
+  width: auto;
+}
+
+.summary-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #16a085 0%, #27ae60 100%); /* Default fallback */
+}
+
+.category-badge[data-category="GROCERIES"] {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+}
+
+.category-badge[data-category="UTILITIES"] {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.category-badge[data-category="ENTERTAINMENT"] {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.category-badge[data-category="TRAVEL"] {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
+  box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+}
+
+.category-badge[data-category="HEALTH"] {
+  background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
+  box-shadow: 0 2px 8px rgba(155, 89, 182, 0.3);
+}
+
+.category-badge[data-category="OTHER"] {
+  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
+  box-shadow: 0 2px 8px rgba(52, 73, 94, 0.3);
+}
+
+.category-badge[data-category="RENT"] {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
+  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+}
+
+.percentage-bar {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.percentage-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  border-radius: 12px;
+  transition: width 0.6s ease;
+}
+
+.percentage-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #495057;
+  z-index: 1;
+}
+
+.summary-total {
+  text-align: right;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e9ecef;
+}
+
+.summary-total h3 {
+  color: #2d3748;
+  font-size: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .toolbar-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

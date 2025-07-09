@@ -1,0 +1,58 @@
+<div class="card">
+  <h2>📊 Expense Summary</h2>
+  
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <label class="form-label">Filter by month:</label>
+      <select [(ngModel)]="selectedMonth" (change)="load()" class="form-control toolbar-select">
+        <option value="">All Months</option>
+        <option *ngFor="let m of months" [value]="m">{{ m }}</option>
+      </select>
+    </div>
+    
+    <div class="toolbar-actions">
+      <button (click)="load()" class="btn btn-primary">🔄 Refresh</button>
+      <button (click)="exportPdf()" class="btn btn-success">📄 Export PDF</button>
+      <a routerLink="/expenses" class="btn btn-secondary">⬅️ Back to Expenses</a>
+    </div>
+  </div>
+
+  <div *ngIf="summary.length === 0" class="text-center" style="padding: 3rem; color: #6c757d;">
+    <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
+    <h3>No data to summarize</h3>
+    <p>Add some expenses to see your spending summary!</p>
+    <a routerLink="/add" class="btn btn-primary">Add Your First Expense</a>
+  </div>
+
+  <div *ngIf="summary.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>🏷️ Category</th>
+          <th>💰 Total Amount</th>
+          <th>📊 Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of summary">
+          <td>
+            <span class="category-badge" [attr.data-category]="s.category">{{ s.category }}</span>
+          </td>
+          <td>
+            <strong>{{ s.total | currency }}</strong>
+          </td>
+          <td>
+            <div class="percentage-bar">
+              <div class="percentage-fill" [style.width.%]="getPercentage(s.total)"></div>
+              <span class="percentage-text">{{ getPercentage(s.total) }}%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="summary-total">
+      <h3>Total: {{ getTotalAmount() | currency }}</h3>
+    </div>
+  </div>
+</div>

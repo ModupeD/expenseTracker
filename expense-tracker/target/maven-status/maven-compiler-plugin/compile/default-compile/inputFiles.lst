@@ -1,0 +1,9 @@
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/dto/ExpenseResponse.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/dto/ExpenseRequest.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/controller/ExpenseController.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/service/ExpenseService.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/ExpenseTrackerApplication.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/model/Category.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/repository/ExpenseRepository.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/model/Expense.java
+/Users/modupeoluwadaniel/expense-tracker/expense-tracker/src/main/java/com/example/expensetracker/dto/SummaryItem.java

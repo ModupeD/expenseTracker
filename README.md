@@ -1,8 +1,8 @@
-# 💰 Expense Tracker - Full Stack Application
+# Expense Tracker - Full Stack Application
 
 A modern, full-stack expense tracking application built with **Spring Boot** (backend) and **Angular** (frontend). Track your personal expenses with beautiful UI, categorization, filtering, and PDF export capabilities.
 
-## 🌟 Overview
+## Overview
 
 This project consists of two main components:
 - **Backend API**: RESTful API built with Spring Boot and Java
@@ -10,30 +10,30 @@ This project consists of two main components:
 
 ![Expense Tracker Demo](https://via.placeholder.com/800x400/27ae60/ffffff?text=Expense+Tracker+App)
 
-## ✨ Key Features
+## Key Features
 
-### 💰 Expense Management
+###  Expense Management
 - Add, view, and track expenses with validation
 - Categorize expenses with color-coded visual indicators
 - Filter expenses by month for better organization
 
-### 📊 Analytics & Reporting
+### Analytics & Reporting
 - Summary dashboard with spending breakdown by category
 - Percentage calculations and visual progress bars
 - Export capabilities to PDF for record-keeping
 
-### 🎨 User Experience
+### User Experience
 - Modern, responsive design that works on all devices
 - Beautiful green and white theme with smooth animations
 - Intuitive navigation and user-friendly forms
 
-### 🛠️ Technical Features
+### Technical Features
 - RESTful API with comprehensive validation
 - Real-time data synchronization
 - In-memory H2 database for quick setup
 - CORS configuration for seamless frontend-backend communication
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 expense-tracker/
@@ -50,7 +50,7 @@ expense-tracker/
 └── README.md               # This file
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - **Java 17+** (for backend)
@@ -99,19 +99,19 @@ npm start
 | `GET` | `/api/expenses?month=January` | Get expenses for specific month |
 | `GET` | `/api/summary` | Get expense summary by category |
 
-## 🏷️ Expense Categories
+## Expense Categories
 
 The application supports 7 predefined categories with distinct colors:
 
 | Category | Color | Description |
 |----------|-------|-------------|
-| 🛒 GROCERIES | Bright Green | Food and grocery shopping |
-| 🏠 RENT | Deep Orange | Housing and rent expenses |
-| ⚡ UTILITIES | Vivid Blue | Bills (electricity, water, internet) |
-| 🎬 ENTERTAINMENT | Bold Red | Movies, games, subscriptions |
-| ✈️ TRAVEL | Bright Orange | Transportation and travel costs |
-| 🏥 HEALTH | Rich Purple | Medical and healthcare expenses |
-| 📦 OTHER | Dark Blue-Gray | Miscellaneous expenses |
+| GROCERIES | Bright Green | Food and grocery shopping |
+| RENT | Deep Orange | Housing and rent expenses |
+| UTILITIES | Vivid Blue | Bills (electricity, water, internet) |
+| TERTAINMENT | Bold Red | Movies, games, subscriptions |
+| TRAVEL | Bright Orange | Transportation and travel costs |
+| HEALTH | Rich Purple | Medical and healthcare expenses |
+| OTHER | Dark Blue-Gray | Miscellaneous expenses |
 
 ## 🛠️ Technology Stack
 
@@ -151,7 +151,7 @@ The application supports 7 predefined categories with distinct colors:
 - Progress bar visualizations
 - Total spending calculations
 
-## 🔧 Development
+## Development
 
 ### Backend Development
 ```bash
@@ -181,7 +181,7 @@ npm test
 npm run build --prod
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Backend Deployment Options
 1. **JAR Deployment**: Build and run the JAR file on any server
@@ -193,12 +193,12 @@ npm run build --prod
 2. **CDN**: AWS CloudFront, Azure CDN
 3. **Traditional Hosting**: Any web server serving static files
 
-## 📚 Documentation
+## Documentation
 
 - [Backend API Documentation](expense-tracker/README.md) - Detailed Spring Boot setup and API reference
 - [Frontend Documentation](expense-tracker-ui/README.md) - Angular application guide and features
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please follow these steps:
 
@@ -215,7 +215,7 @@ We welcome contributions! Please follow these steps:
 - Update documentation as needed
 - Ensure all tests pass before submitting
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -233,15 +233,15 @@ We welcome contributions! Please follow these steps:
 - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
 - Clear Maven cache: `./mvnw clean`
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Authors
+## Authors
 
 - **Modupe Daniel**
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Spring Boot team for the excellent framework
 - Angular team for the powerful frontend framework
@@ -250,6 +250,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Start tracking your expenses today! 💰✨**
+**Start tracking your expenses today!**
 
 For detailed setup instructions, please refer to the individual README files in the `expense-tracker/` and `expense-tracker-ui/` directories.

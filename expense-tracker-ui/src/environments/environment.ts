@@ -1,3 +1,3 @@
 export const environment = {
-  apiBase: 'http://localhost:8080/api'
+  apiBase: 'https://expensetracker-mmfa.onrender.com/api'
 };

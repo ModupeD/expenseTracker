@@ -62,7 +62,7 @@ public class ExpenseService {
         expense.setCategory(request.getCategory());
         expense.setDate(LocalDate.parse(request.getDate()));
         Expense saved = expenseRepository.save(expense);
-        return new ExpenseResponse(saved.getId(), saved.getAmount(), saved.getCategory(), saved.getDate())
+        return new ExpenseResponse(saved.getId(), saved.getAmount(), saved.getCategory(), saved.getDate());
     }
 
     public void deleteExpense(Long id) {

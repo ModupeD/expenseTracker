@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-expenses-list',
@@ -16,6 +17,8 @@ import autoTable from 'jspdf-autotable';
 })
 export class ExpensesListComponent {
   private service = inject(ExpensesService);
+  private notify = inject(NotificationService);
+
   expenses: Expense[] = [];
   monthFilter = '';
   months = [
@@ -59,7 +62,14 @@ export class ExpensesListComponent {
     doc.save(`${title.replace(/\s+/g, '_').toLowerCase()}.pdf`);
   }
 
-  delete(id:number): void {
-    this.service.deleteExpense(id).subscribe(() => this.load());
+delete(id: number): void {
+  this.service.deleteExpense(id).subscribe({
+    next: () => this.notify.success('Expense deleted'),
+    error: () => this.notify.error('Failed to delete expense')
+  });
+}
+
+  update(id:number, expense: Expense ): void {
+    this.service.updateExpense(id, expense).subscribe(() => this.load());
   }
 }

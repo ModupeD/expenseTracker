@@ -43,7 +43,8 @@
         </td>
         <td>{{ e.date | date:'mediumDate' }}</td>
         <td>
-          <button (click)="delete(e.id)" class="btn btn-danger">🗑️ Delete</button>
+          <button (click)="delete(e.id)" class="btn btn-danger">Delete</button>
+          <a [routerLink]="['/edit',e.id]" class="btn btn-success">Edit</a>
         </td>
       </tr>
     </tbody>

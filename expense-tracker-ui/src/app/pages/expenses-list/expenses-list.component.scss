@@ -90,6 +90,10 @@ th {
   text-align: center;
 }
 
+.btn-danger{
+  background-color: #c0392b;
+}
+
 @media (max-width: 768px) {
   .toolbar {
     flex-direction: column;

@@ -18,6 +18,10 @@ export class ExpensesService {
     return this.http.get<Expense[]>(`${this.base}/expenses`, { params });
   }
 
+  getExpense(id: number): Observable<Expense> {
+    return this.http.get<Expense>('${this.base/expense/${id}')
+  }
+
   getSummary(): Observable<SummaryItem[]> {
     return this.http.get<SummaryItem[]>(`${this.base}/summary`);
   }
@@ -29,5 +33,13 @@ export class ExpensesService {
   deleteExpense(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/expenses/${id}`)
   }
+
+  updateExpense(id: number, expense: Omit<Expense, 'id'>): Observable<Expense> {
+    return this.http.put<Expense>(`${this.base}/expenses/${id}`, expense)
+  }
+  saveExpense(payload: Omit<Expense, 'id'>, id?: number): Observable<Expense> {
+  return id ? this.updateExpense(id, payload) : this.addExpense(payload);
+}
+
 
 }

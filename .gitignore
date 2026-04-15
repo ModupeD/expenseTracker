@@ -1,2 +1,19 @@
 # Local Spring Boot config with credentials
+# Local Spring Boot config with credentials
 backend/src/main/resources/application-local.yml
+
+# Maven build output
+backend/target/
+backend/.mvn/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+
+# JDK / JVM (shouldn't end up here, but just in case)
+*.jdk/
+*.jmod

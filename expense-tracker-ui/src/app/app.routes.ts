@@ -7,6 +7,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'expenses', pathMatch: 'full' },
   { path: 'expenses', component: ExpensesListComponent },
   { path: 'add', component: ExpenseFormComponent },
+  { path: 'edit', component: ExpenseFormComponent },
   { path: 'summary', component: SummaryComponent },
   { path: '**', redirectTo: 'expenses' }
 ];

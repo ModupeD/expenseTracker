@@ -40,6 +40,10 @@ public class ExpenseController {
         return expenseService.getSummary();
     }
 
+    @PutMapping("/expenses/{id}")
+    public ExpenseResponse updateExpense(@PathVariable Long id, @Valid @RequestBody ExpenseRequest request){
+        return expenseService.updateExpense(id, request);
+    }
     @DeleteMapping("/expenses/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteExpense(@PathVariable Long id){

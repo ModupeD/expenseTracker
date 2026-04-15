@@ -55,6 +55,16 @@ public class ExpenseService {
                 .collect(Collectors.toList());
     }
 
+  public ExpenseResponse updateExpense(Long id, ExpenseRequest request) {
+        Expense expense = expenseRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Expense not found"));
+        expense.setAmount(request.getAmount());
+        expense.setCategory(request.getCategory());
+        expense.setDate(LocalDate.parse(request.getDate()));
+        Expense saved = expenseRepository.save(expense);
+        return new ExpenseResponse(saved.getId(), saved.getAmount(), saved.getCategory(), saved.getDate())
+    }
+
     public void deleteExpense(Long id) {
         expenseRepository.deleteById(id);
     }

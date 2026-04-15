@@ -2,24 +2,19 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpensesService } from '../../services/expenses.service';
 import { Expense } from '../../models/expense.model';
-import { Category, SummaryItem } from '../../models/category';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartData, Chart, registerables } from 'chart.js';
-
-Chart.register(...registerables);
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { NotificationService } from '../../services/notification.service';
-import { colorFor } from '../../theme/tokens';
+import { DashboardSummaryComponent } from './dashboard-summary/dashboard-summary.component';
 
 type ViewMode = 'list' | 'summary';
 
 @Component({
   selector: 'app-expenses-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, BaseChartDirective],
+  imports: [CommonModule, RouterLink, FormsModule, DashboardSummaryComponent],
   templateUrl: './expenses-list.component.html',
   styleUrl: './expenses-list.component.scss'
 })
@@ -28,7 +23,6 @@ export class ExpensesListComponent {
   private notify = inject(NotificationService);
 
   expenses: Expense[] = [];
-  summary: SummaryItem[] = [];
   view: ViewMode = 'list';
   monthFilter = '';
   openMenuId: number | null = null;
@@ -38,39 +32,13 @@ export class ExpensesListComponent {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  chartType: 'doughnut' = 'doughnut';
-  chartOptions: ChartConfiguration<'doughnut'>['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          padding: 16,
-          usePointStyle: true,
-          font: { size: 12 }
-        }
-      }
-    },
-    cutout: '65%'
-  };
-
   constructor() {
     this.load();
   }
 
   load(): void {
     const month = this.monthFilter || undefined;
-    this.service.getExpenses(month).subscribe((data) => {
-      this.expenses = data;
-      this.summary = this.computeSummary(data);
-    });
-  }
-
-  private computeSummary(expenses: Expense[]): SummaryItem[] {
-    const map = new Map<string, number>();
-    expenses.forEach((e) => map.set(e.category, (map.get(e.category) || 0) + Number(e.amount)));
-    return Array.from(map.entries()).map(([category, total]) => ({ category: category as Category, total }));
+    this.service.getExpenses(month).subscribe((data) => (this.expenses = data));
   }
 
   setView(view: ViewMode): void {
@@ -79,48 +47,6 @@ export class ExpensesListComponent {
 
   get total(): number {
     return this.expenses.reduce((sum, e) => sum + Number(e.amount), 0);
-  }
-
-  get averageExpense(): number {
-    return this.expenses.length > 0 ? this.total / this.expenses.length : 0;
-  }
-
-  get sortedSummary(): SummaryItem[] {
-    return [...this.summary].sort((a, b) => Number(b.total) - Number(a.total));
-  }
-
-  get highestCategory(): SummaryItem | null {
-    return this.sortedSummary[0] ?? null;
-  }
-
-  get lowestCategory(): SummaryItem | null {
-    const sorted = this.sortedSummary;
-    return sorted.length > 0 ? sorted[sorted.length - 1] : null;
-  }
-
-  get chartData(): ChartData<'doughnut'> {
-    const sorted = this.sortedSummary;
-    return {
-      labels: sorted.map(s => this.titleCase(s.category)),
-      datasets: [{
-        data: sorted.map(s => Number(s.total)),
-        backgroundColor: sorted.map(s => colorFor(s.category)),
-        borderWidth: 0
-      }]
-    };
-  }
-
-  getPercentage(amount: number): number {
-    const t = this.summary.reduce((sum, s) => sum + Number(s.total), 0);
-    return t > 0 ? Math.round((amount / t) * 100) : 0;
-  }
-
-  getCategoryColor(category: string): string {
-    return colorFor(category);
-  }
-
-  private titleCase(s: string): string {
-    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
   }
 
   toggleMenu(id: number): void {

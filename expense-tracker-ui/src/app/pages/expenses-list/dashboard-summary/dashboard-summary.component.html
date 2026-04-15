@@ -1,0 +1,81 @@
+<div *ngIf="expenses.length === 0" class="card empty-state">
+  <h3>No data to summarize</h3>
+  <p>Add some expenses to see your spending dashboard!</p>
+</div>
+
+<ng-container *ngIf="expenses.length > 0">
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-header">
+        <span class="kpi-label">Total Spending</span>
+        <span class="kpi-icon">$</span>
+      </div>
+      <div class="kpi-value">{{ total | currency }}</div>
+      <div class="kpi-subtext">{{ expenses.length }} transactions</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-header">
+        <span class="kpi-label">Average Expense</span>
+        <span class="kpi-icon">≡</span>
+      </div>
+      <div class="kpi-value">{{ averageExpense | currency }}</div>
+      <div class="kpi-subtext">Per transaction</div>
+    </div>
+
+    <div class="kpi-card" *ngIf="highestCategory">
+      <div class="kpi-header">
+        <span class="kpi-label">Highest Category</span>
+        <span class="kpi-icon up">↗</span>
+      </div>
+      <div class="kpi-value kpi-text">{{ highestCategory.category | titlecase }}</div>
+      <div class="kpi-subtext">{{ highestCategory.total | currency }}</div>
+    </div>
+
+    <div class="kpi-card" *ngIf="lowestCategory">
+      <div class="kpi-header">
+        <span class="kpi-label">Lowest Category</span>
+        <span class="kpi-icon down">↘</span>
+      </div>
+      <div class="kpi-value kpi-text">{{ lowestCategory.category | titlecase }}</div>
+      <div class="kpi-subtext">{{ lowestCategory.total | currency }}</div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="card">
+      <h3 class="card-title">Spending Distribution</h3>
+      <div class="chart-wrapper">
+        <canvas
+          baseChart
+          [type]="chartType"
+          [data]="chartData"
+          [options]="chartOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Category Breakdown</h3>
+      <div class="breakdown-list">
+        <div class="breakdown-row" *ngFor="let s of sortedSummary">
+          <div class="breakdown-header">
+            <span class="breakdown-dot" [style.background]="getCategoryColor(s.category)"></span>
+            <span class="breakdown-name">{{ s.category | titlecase }}</span>
+            <span class="breakdown-amount">
+              {{ s.total | currency }}
+              <span class="breakdown-pct">({{ getPercentage(s.total) }}%)</span>
+            </span>
+          </div>
+          <div class="breakdown-bar">
+            <div
+              class="breakdown-fill"
+              [style.width.%]="getPercentage(s.total)"
+              [style.background]="getCategoryColor(s.category)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,13 +1,12 @@
 <nav class="navbar">
-  <a routerLink="/expenses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-    💰 Expenses
+  <a routerLink="/expenses" class="brand">
+    <img src="https://res.cloudinary.com/dcraynwyo/image/upload/v1776279709/logo_2_wmw61l.png" alt="Logo" class="logo" />
   </a>
-  <a routerLink="/add" routerLinkActive="active">
-    ➕ Add Expense
-  </a>
-  <a routerLink="/summary" routerLinkActive="active">
-    📊 Summary
-  </a>
+  <div class="nav-links">
+    <a routerLink="/expenses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Expenses
+    </a>
+  </div>
 </nav>
 <div class="container">
   <router-outlet></router-outlet>

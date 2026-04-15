@@ -1,52 +1,162 @@
-<div class="card">
-  <h2>💰 Your Expenses</h2>
-  
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1>Expenses</h1>
+      <p class="subtitle">Track and manage your spending</p>
+    </div>
+    <div class="header-actions">
+      <button (click)="exportPdf()" class="btn btn-outline">
+        <span class="icon">⬇</span> Export
+      </button>
+      <a routerLink="/add" class="btn btn-primary">
+        <span class="icon">+</span> Add Expense
+      </a>
+    </div>
+  </div>
+
   <div class="toolbar">
-    <div class="toolbar-group">
-      <label class="form-label">Filter by month:</label>
-      <select [(ngModel)]="monthFilter" (change)="load()" class="form-control toolbar-select">
+    <div class="toolbar-left">
+      <select [(ngModel)]="monthFilter" (change)="load()" class="select">
         <option value="">All Months</option>
         <option *ngFor="let m of months" [value]="m">{{ m }}</option>
       </select>
+
+      <div class="view-toggle">
+        <button (click)="setView('list')" [class.active]="view === 'list'" class="toggle-btn">
+          List
+        </button>
+        <button (click)="setView('summary')" [class.active]="view === 'summary'" class="toggle-btn">
+          Summary
+        </button>
+      </div>
     </div>
-    
-    <div class="toolbar-actions">
-      <a routerLink="/add" class="btn btn-primary">➕ Add Expense</a>
-      <a routerLink="/summary" class="btn btn-secondary">📊 View Summary</a>
-      <button (click)="exportPdf()" class="btn btn-success">📄 Export PDF</button>
+
+    <div class="toolbar-right">
+      <span class="count">{{ expenses.length }} expenses</span>
+      <span class="divider">|</span>
+      <span class="total-label">Total:</span>
+      <span class="total-value">{{ total | currency }}</span>
     </div>
   </div>
 
-  <div *ngIf="expenses.length === 0" class="text-center" style="padding: 3rem; color: #6c757d;">
-    <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
-    <h3>No expenses found</h3>
-    <p>Start by adding your first expense!</p>
-    <a routerLink="/add" class="btn btn-primary">Add Your First Expense</a>
+  <!-- LIST VIEW -->
+  <div class="card" *ngIf="view === 'list'">
+    <div *ngIf="expenses.length === 0" class="empty-state">
+      <h3>No expenses found</h3>
+      <p>Start by adding your first expense!</p>
+      <a routerLink="/add" class="btn btn-primary">Add Your First Expense</a>
+    </div>
+
+    <table class="expenses-table" *ngIf="expenses.length > 0">
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of expenses">
+          <td class="amount">{{ e.amount | currency }}</td>
+          <td>
+            <span class="badge" [attr.data-category]="e.category">{{ e.category | titlecase }}</span>
+          </td>
+          <td class="date">{{ e.date | date:'MMM d, y' }}</td>
+          <td class="actions">
+            <button class="menu-btn" (click)="toggleMenu(e.id)">⋯</button>
+            <div class="menu" *ngIf="openMenuId === e.id">
+              <a [routerLink]="['/edit', e.id]" class="menu-item">Edit</a>
+              <button class="menu-item danger" (click)="delete(e.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <table class="table" *ngIf="expenses.length > 0">
-    <thead>
-      <tr>
-        <th>💵 Amount</th>
-        <th>🏷️ Category</th>
-        <th>📅 Date</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let e of expenses">
-        <td>
-          <strong>{{ e.amount | currency }}</strong>
-        </td>
-        <td>
-          <span class="category-badge" [attr.data-category]="e.category">{{ e.category }}</span>
-        </td>
-        <td>{{ e.date | date:'mediumDate' }}</td>
-        <td>
-          <button (click)="delete(e.id)" class="btn btn-danger">Delete</button>
-          <a [routerLink]="['/edit',e.id]" class="btn btn-success">Edit</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- SUMMARY / DASHBOARD VIEW -->
+  <div *ngIf="view === 'summary'" class="dashboard">
+    <div *ngIf="summary.length === 0" class="card empty-state">
+      <h3>No data to summarize</h3>
+      <p>Add some expenses to see your spending dashboard!</p>
+    </div>
+
+    <ng-container *ngIf="summary.length > 0">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Total Spending</span>
+            <span class="kpi-icon">$</span>
+          </div>
+          <div class="kpi-value">{{ total | currency }}</div>
+          <div class="kpi-subtext">{{ expenses.length }} transactions</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Average Expense</span>
+            <span class="kpi-icon">≡</span>
+          </div>
+          <div class="kpi-value">{{ averageExpense | currency }}</div>
+          <div class="kpi-subtext">Per transaction</div>
+        </div>
+
+        <div class="kpi-card" *ngIf="highestCategory">
+          <div class="kpi-header">
+            <span class="kpi-label">Highest Category</span>
+            <span class="kpi-icon up">↗</span>
+          </div>
+          <div class="kpi-value kpi-text">{{ highestCategory.category | titlecase }}</div>
+          <div class="kpi-subtext">{{ highestCategory.total | currency }}</div>
+        </div>
+
+        <div class="kpi-card" *ngIf="lowestCategory">
+          <div class="kpi-header">
+            <span class="kpi-label">Lowest Category</span>
+            <span class="kpi-icon down">↘</span>
+          </div>
+          <div class="kpi-value kpi-text">{{ lowestCategory.category | titlecase }}</div>
+          <div class="kpi-subtext">{{ lowestCategory.total | currency }}</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3 class="card-title">Spending Distribution</h3>
+          <div class="chart-wrapper">
+            <canvas
+              baseChart
+              [type]="chartType"
+              [data]="chartData"
+              [options]="chartOptions">
+            </canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Category Breakdown</h3>
+          <div class="breakdown-list">
+            <div class="breakdown-row" *ngFor="let s of sortedSummary">
+              <div class="breakdown-header">
+                <span class="breakdown-dot" [style.background]="getCategoryColor(s.category)"></span>
+                <span class="breakdown-name">{{ s.category | titlecase }}</span>
+                <span class="breakdown-amount">
+                  {{ s.total | currency }}
+                  <span class="breakdown-pct">({{ getPercentage(s.total) }}%)</span>
+                </span>
+              </div>
+              <div class="breakdown-bar">
+                <div
+                  class="breakdown-fill"
+                  [style.width.%]="getPercentage(s.total)"
+                  [style.background]="getCategoryColor(s.category)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>

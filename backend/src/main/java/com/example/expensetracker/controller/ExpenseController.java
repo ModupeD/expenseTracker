@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost:4200", "https://expense-tracker-beryl-psi.vercel.app"},
+@CrossOrigin(origins = {"http://localhost:4200", "https://expense-tracker-liart-alpha-77.vercel.app/"},
  methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,  RequestMethod.PUT})
 public class ExpenseController {
 

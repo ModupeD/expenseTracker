@@ -14,7 +14,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://expense-tracker-beryl-psi.vercel.app"},
+ methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,  RequestMethod.PUT})
 public class ExpenseController {
 
     private final ExpenseService expenseService;
@@ -37,5 +38,11 @@ public class ExpenseController {
     @GetMapping("/summary")
     public List<SummaryItem> summary() {
         return expenseService.getSummary();
+    }
+
+    @DeleteMapping("/expenses/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteExpense(@PathVariable Long id){
+        expenseService.deleteExpense(id);
     }
 } 

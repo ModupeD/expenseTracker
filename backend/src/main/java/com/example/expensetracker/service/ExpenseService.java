@@ -54,4 +54,8 @@ public class ExpenseService {
                 .sorted(Comparator.comparing(SummaryItem::getCategory))
                 .collect(Collectors.toList());
     }
+
+    public void deleteExpense(Long id) {
+        expenseRepository.deleteById(id);
+    }
 } 

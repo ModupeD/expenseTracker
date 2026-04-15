@@ -58,4 +58,8 @@ export class ExpensesListComponent {
 
     doc.save(`${title.replace(/\s+/g, '_').toLowerCase()}.pdf`);
   }
+
+  delete(id:number): void {
+    this.service.deleteExpense(id).subscribe(() => this.load());
+  }
 }

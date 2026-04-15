@@ -1,0 +1,2 @@
+# Local Spring Boot config with credentials
+backend/src/main/resources/application-local.yml

@@ -18,11 +18,16 @@ export class ExpensesService {
     return this.http.get<Expense[]>(`${this.base}/expenses`, { params });
   }
 
+  getSummary(): Observable<SummaryItem[]> {
+    return this.http.get<SummaryItem[]>(`${this.base}/summary`);
+  }
+
   addExpense(expense: Omit<Expense, 'id'>): Observable<Expense> {
     return this.http.post<Expense>(`${this.base}/expenses`, expense);
   }
 
-  getSummary(): Observable<SummaryItem[]> {
-    return this.http.get<SummaryItem[]>(`${this.base}/summary`);
+  deleteExpense(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.base}/expenses/${id}`)
   }
+
 }

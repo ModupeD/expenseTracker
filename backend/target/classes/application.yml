@@ -1,13 +1,11 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:expensetracker;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://dpg-d7f6fi3bc2fs73bdu0mg-a.oregon-postgres.render.com/expense_tracker_data_hm2x?sslmode=require
+    driverClassName: org.postgresql.Driver
+    username: expense_tracker_data_hm2x_user
+    password: HVFePC5SjAjhJkxhiOtYj3uQc2xKMUZ0
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  h2:
-    console:
-      enabled: true 
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

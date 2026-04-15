@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Expense } from '../models/expense.model';
-import { SummaryItem } from '../models/summary-item.model';
+import { SummaryItem } from '../models/category';
 
 @Injectable({ providedIn: 'root' })
 export class ExpensesService {

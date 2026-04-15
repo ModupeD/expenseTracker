@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpensesService } from '../../services/expenses.service';
 import { Expense } from '../../models/expense.model';
-import { SummaryItem } from '../../models/summary-item.model';
+import { Category, SummaryItem } from '../../models/category';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
@@ -12,20 +12,9 @@ Chart.register(...registerables);
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { NotificationService } from '../../services/notification.service';
+import { colorFor } from '../../theme/tokens';
 
 type ViewMode = 'list' | 'summary';
-
-const CATEGORY_COLORS: Record<string, string> = {
-  GROCERIES: '#10b981',
-  ENTERTAINMENT: '#8b5cf6',
-  UTILITIES: '#f59e0b',
-  TRANSPORT: '#3b82f6',
-  TRAVEL: '#3b82f6',
-  SHOPPING: '#ef4444',
-  HEALTH: '#ec4899',
-  RENT: '#f97316',
-  OTHER: '#6b7280'
-};
 
 @Component({
   selector: 'app-expenses-list',
@@ -81,7 +70,7 @@ export class ExpensesListComponent {
   private computeSummary(expenses: Expense[]): SummaryItem[] {
     const map = new Map<string, number>();
     expenses.forEach((e) => map.set(e.category, (map.get(e.category) || 0) + Number(e.amount)));
-    return Array.from(map.entries()).map(([category, total]) => ({ category, total }));
+    return Array.from(map.entries()).map(([category, total]) => ({ category: category as Category, total }));
   }
 
   setView(view: ViewMode): void {
@@ -115,7 +104,7 @@ export class ExpensesListComponent {
       labels: sorted.map(s => this.titleCase(s.category)),
       datasets: [{
         data: sorted.map(s => Number(s.total)),
-        backgroundColor: sorted.map(s => CATEGORY_COLORS[s.category] || '#6b7280'),
+        backgroundColor: sorted.map(s => colorFor(s.category)),
         borderWidth: 0
       }]
     };
@@ -127,7 +116,7 @@ export class ExpensesListComponent {
   }
 
   getCategoryColor(category: string): string {
-    return CATEGORY_COLORS[category] || '#6b7280';
+    return colorFor(category);
   }
 
   private titleCase(s: string): string {

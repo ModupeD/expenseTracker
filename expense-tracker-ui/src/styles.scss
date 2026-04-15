@@ -1,3 +1,52 @@
+:root {
+  --color-emerald: #10b981;
+  --color-emerald-dark: #059669;
+  --color-violet: #8b5cf6;
+  --color-amber: #f59e0b;
+  --color-red: #ef4444;
+  --color-red-dark: #dc2626;
+  --color-pink: #ec4899;
+  --color-orange: #f97316;
+  --color-gray: #6b7280;
+
+  --bg-page: #f9fafb;
+  --bg-surface: #ffffff;
+  --bg-muted: #f3f4f6;
+  --bg-subtle: #e5e7eb;
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #374151;
+
+  --border-default: #e5e7eb;
+  --border-soft: #f3f4f6;
+
+  --brand: #830a24;
+  --brand-hover: #430406;
+  --brand-tint: rgba(59, 130, 246, 0.1);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --category-groceries-bg: #d1fae5;
+  --category-groceries-fg: #065f46;
+  --category-entertainment-bg: #ede9fe;
+  --category-entertainment-fg: #5b21b6;
+  --category-utilities-bg: #fef3c7;
+  --category-utilities-fg: #92400e;
+  --category-transport-bg: #dbeafe;
+  --category-transport-fg: #1e40af;
+  --category-shopping-bg: #fee2e2;
+  --category-shopping-fg: #991b1b;
+  --category-health-bg: #fce7f3;
+  --category-health-fg: #9d174d;
+  --category-rent-bg: #ffedd5;
+  --category-rent-fg: #9a3412;
+  --category-other-bg: #e5e7eb;
+  --category-other-fg: #374151;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,9 +54,9 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  background: #f9fafb;
+  background: var(--bg-page);
   min-height: 100vh;
-  color: #111827;
+  color: var(--text-primary);
 }
 
 .container {
@@ -19,7 +68,7 @@ body {
 .btn {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-weight: 500;
   font-size: 0.875rem;
   cursor: pointer;
@@ -35,48 +84,48 @@ body {
 }
 
 .btn-primary {
-  background: #3b82f6;
+  background: var(--brand);
   color: white;
 
   &:hover {
-    background: #2563eb;
+    background: var(--brand-hover);
   }
 }
 
 .btn-outline {
-  background: white;
-  color: #374151;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-default);
 
   &:hover {
-    background: #f9fafb;
+    background: var(--bg-page);
   }
 }
 
 .btn-secondary {
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--bg-muted);
+  color: var(--text-muted);
 
   &:hover {
-    background: #e5e7eb;
+    background: var(--bg-subtle);
   }
 }
 
 .btn-success {
-  background: #10b981;
+  background: var(--color-emerald);
   color: white;
 
   &:hover {
-    background: #059669;
+    background: var(--color-emerald-dark);
   }
 }
 
 .btn-danger {
-  background: #ef4444;
+  background: var(--color-red);
   color: white;
 
   &:hover {
-    background: #dc2626;
+    background: var(--color-red-dark);
   }
 }
 
@@ -93,36 +142,36 @@ body {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-muted);
   font-size: 0.875rem;
 }
 
 .form-control {
   width: 100%;
   padding: 0.625rem 0.75rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   font-size: 0.925rem;
-  background: white;
-  color: #111827;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   transition: border-color 0.15s, box-shadow 0.15s;
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-tint);
   }
 }
 
 .card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
   padding: 2rem;
   margin-bottom: 1.5rem;
 }
 
 h1, h2, h3 {
-  color: #111827;
+  color: var(--text-primary);
   margin-top: 0;
 }

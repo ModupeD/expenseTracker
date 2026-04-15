@@ -10,7 +10,7 @@
 
 .notification {
   padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: white;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -18,15 +18,15 @@
 }
 
 .success {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  background: var(--color-emerald);
 }
 
 .error {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  background: var(--color-red);
 }
 
 .info {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: var(--brand);
 }
 
 @keyframes slide-in {

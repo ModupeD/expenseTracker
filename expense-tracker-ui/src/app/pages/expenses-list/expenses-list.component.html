@@ -39,7 +39,6 @@
     </div>
   </div>
 
-  <!-- LIST VIEW -->
   <div class="card" *ngIf="view === 'list'">
     <div *ngIf="expenses.length === 0" class="empty-state">
       <h3>No expenses found</h3>
@@ -75,7 +74,6 @@
     </table>
   </div>
 
-  <!-- SUMMARY / DASHBOARD VIEW -->
   <div *ngIf="view === 'summary'" class="dashboard">
     <div *ngIf="summary.length === 0" class="card empty-state">
       <h3>No data to summarize</h3>

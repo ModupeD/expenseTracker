@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpensesService } from '../../services/expenses.service';
-import { SummaryItem } from '../../models/summary-item.model';
+import { Category, SummaryItem } from '../../models/category';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import jsPDF from 'jspdf';
@@ -39,7 +39,6 @@ export class SummaryComponent {
 
   load(): void {
     const month = this.selectedMonth || undefined;
-    // If backend summary endpoint doesn't support month, compute client side
     if (month) {
       this.service.getExpenses(month).subscribe((expenses) => {
         const map = new Map<string, number>();
@@ -47,7 +46,7 @@ export class SummaryComponent {
           map.set(e.category, (map.get(e.category) || 0) + e.amount);
         });
         this.summary = Array.from(map.entries()).map((e) => ({
-          category: e[0],
+          category: e[0] as Category,
           total: e[1]
         }));
       });
